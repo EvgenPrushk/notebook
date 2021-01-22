@@ -1,5 +1,4 @@
-// use экранированное пространство имен
-; (function () {
+;(function () {
     "use strict"
 
     const notes = [
@@ -33,19 +32,19 @@
 
     };
 
-    api.getNotes = function getNoyes() {
-        return getCopy(notes);
+    api.getNotes = function getNotes () {
+        return notes;
     }
 
-    api.setNotes = function setNotes(notes) {
-
+    api.setNotes = function setNotes (notes) {
+        
     }
 
     window.database = api;
-    // защита информации от манипуляций пользователя для этого создаем копию объекта
-    // сюрилизация и ансюрилизация
-    function getCopy(obj) {
+
+    function getCopy (obj) {
         return JSON.parse(JSON.stringify(obj));
     }
 
 })();
+
