@@ -1,1 +1,2 @@
 
+const application = new Application
