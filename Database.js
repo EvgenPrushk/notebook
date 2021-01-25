@@ -36,8 +36,9 @@
         return getCopy(notes);
     }
 
-    api.setNotes = function setNotes (notes) {
-        
+    api.setNote = function setNote (noteId, content) {
+          const note = notes.find (x => x.id === noteId);
+          note.content = content; 
     }
 
     window.database = api;

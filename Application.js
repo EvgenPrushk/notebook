@@ -5,8 +5,15 @@ class Application {
         this.notes = database.getNotes();
         this.bottons = document.querySelector('[data-buttons]');
         this.textarea = document.querySelector('textarea');
-        
+
         this.updateButtons();
+
+        this.textarea.addEventListener('keyup', () => {
+            // передаем в случае нажатия клавишы в textarea  определенного noteId информацию  value
+           database.setNote(this.noteId, this.textarea.value);
+           // запрашиваем новое состояние базы данных т.к. мы работаем с копией
+           this.notes = database.getNotes();
+        });
     }
 
     updateButtons () {
