@@ -33,7 +33,7 @@
     };
 
     api.getNotes = function getNotes () {
-        return notes;
+        return getCopy(notes);
     }
 
     api.setNotes = function setNotes (notes) {
