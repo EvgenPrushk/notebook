@@ -9,10 +9,10 @@ class Application {
         this.updateButtons();
 
         this.textarea.addEventListener('keyup', () => {
-            // передаем в случае нажатия клавишы в textarea  определенного noteId информацию  value
-           database.setNote(this.noteId, this.textarea.value);
-           // запрашиваем новое состояние базы данных т.к. мы работаем с копией
-           this.notes = database.getNotes();
+        // передаем в случае нажатия клавишы в textarea  определенного noteId информацию  value
+        database.setNote(this.noteId, this.textarea.value);
+        // запрашиваем новое состояние базы данных т.к. мы работаем с копией
+        this.notes = database.getNotes();
         });
     }
 
@@ -42,6 +42,9 @@ class Application {
     }
 
     activeNote () {
+        database.update();
+        // запрашивамем текущую версию базы данных
+        this.notes = database.getNotes();
         this.updateButtons();
         const note = this.notes.find(x => x.id === this.noteId);
         this.textarea.value = note.content; 
