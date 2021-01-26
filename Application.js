@@ -45,5 +45,6 @@ class Application {
         this.updateButtons();
         const note = this.notes.find(x => x.id === this.noteId);
         this.textarea.value = note.content; 
+        this.textarea.disabled = false;
     }
 }
