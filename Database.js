@@ -18,13 +18,33 @@
         const note = notes.find(x => x.id === noteId);
         note.content = content;
 
+        if (content.length) {
+            // расплитим первую строчку по переносу строки
+            const [title] = content.split('\n')
+            // берем только 25 символок от title
+            note.title= title.substr(0, 24);
+        }
+
         saveLocal();
+    }
+
+    api.createNote =function createNote () {
+        const note = {
+            id: notes.length + 1,
+            title: '',
+            content: '',
+        }
+        // помещаем в начала новый элемент
+        notes.unshift(note);
+        saveLocal();
+        return note.id;
     }
 
     api.update = function update () {
         for (const note of notes) {
             // если есть длина контанта, то продолжим
             if (note.content.length) {
+
                 continue;
             }
 
@@ -40,36 +60,36 @@
         saveLocal();
     }
 
-    api.reinit = function reinit() {
-        notes.splice(0, notes.length);
-        notes.push(
-            {
-                id: 1,
-                title: "Список полезных дел",
-                content: "Список полезных дел"
-            });
+    // api.reinit = function reinit() {
+    //     notes.splice(0, notes.length);
+    //     notes.push(
+    //         {
+    //             id: 1,
+    //             title: "Список полезных дел",
+    //             content: "Список полезных дел"
+    //         });
 
-        notes.push({
-                id: 2,
-                title: "Лучшее за неделю",
-                content: "Лучшее за неделю"
-        });
-        notes.push({
-                id: 3,
-                title: "Фильмы на прокат",
-                content: `Фильмы на прокат
-                1. Вечно молодой
-                2. Гори гори ясно
-                3. Призрак в доспехах
-                4. Назад в будущее`
-        });
-        notes.push({
-                id: 4,
-                title: "Интенсивы на constcode.ru",
-                content: "Интенсивы на constcode.ru"
-        });
-        saveLocal();
-    }
+    //     notes.push({
+    //             id: 2,
+    //             title: "Лучшее за неделю",
+    //             content: "Лучшее за неделю"
+    //     });
+    //     notes.push({
+    //             id: 3,
+    //             title: "Фильмы на прокат",
+    //             content: `Фильмы на прокат
+    //             1. Вечно молодой
+    //             2. Гори гори ясно
+    //             3. Призрак в доспехах
+    //             4. Назад в будущее`
+    //     });
+    //     notes.push({
+    //             id: 4,
+    //             title: "Интенсивы на constcode.ru",
+    //             content: "Интенсивы на constcode.ru"
+    //     });
+    //     saveLocal();
+    // }
 
     window.database = api;
 
@@ -97,5 +117,3 @@
     }
 
 })();
-
-13-44

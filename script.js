@@ -1,1 +1,1 @@
-const application = new Application
+new Application

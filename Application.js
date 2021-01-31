@@ -13,7 +13,15 @@ class Application {
         database.setNote(this.noteId, this.textarea.value);
         // запрашиваем новое состояние базы данных т.к. мы работаем с копией
         this.notes = database.getNotes();
+        this.updateButtons();
         });
+
+        document.
+        querySelector('[data-addnote]').
+        addEventListener('click', ()=> {
+            this.noteId = database.createNote();
+            this.activeNote(true);
+        })
     }
 
     updateButtons () {
@@ -41,10 +49,15 @@ class Application {
         }                      
     }
 
-    activeNote () {
-        database.update();
+    activeNote (isNew) {
+        // если присуствует новая запись, то мы не обнавляем базу данных
+        if (!isNew) {
+            database.update();
+        
+        }
         // запрашивамем текущую версию базы данных
         this.notes = database.getNotes();
+        
         this.updateButtons();
         const note = this.notes.find(x => x.id === this.noteId);
         this.textarea.value = note.content; 
